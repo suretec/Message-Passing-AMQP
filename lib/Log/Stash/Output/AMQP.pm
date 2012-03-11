@@ -3,17 +3,30 @@ use Moose;
 use namespace::autoclean;
 
 with qw/
-    Log::Stash::AMQP::Role::HasAChannel
+    Log::Stash::AMQP::Role::DeclaresExchange
     Log::Stash::Role::Output
 /;
+
+sub BUILD {
+    my $self = shift;
+    $self->_connection;
+}
 
 sub consume {
     my $self = shift;
     my $data = shift;
+    unless ($self->_exchange) {
+        warn("No exchange yet, dropping message");
+        return;
+    }
     my $bytes = $self->encode($data);
-    $self->_amqp_send($bytes);
+    my $routing_key = '#';
+    $self->_channel->publish(
+        body => $bytes,
+        exchange => $self->exchange_name,
+        routing_key => $routing_key,
+    );
 }
-
 
 1;
 

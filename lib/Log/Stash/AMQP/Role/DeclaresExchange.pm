@@ -1,6 +1,7 @@
 package Log::Stash::AMQP::Role::DeclaresExchange;
 use Moose::Role;
 use Moose::Util::TypeConstraints;
+use Scalar::Util qw/ weaken /;
 use namespace::autoclean;
 
 with 'Log::Stash::AMQP::Role::HasAChannel';

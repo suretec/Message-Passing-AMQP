@@ -45,7 +45,6 @@ has _connecting_timer => (
         my $self = shift;
         weaken $self;
         AnyEvent->timer(after => $self->timeout, cb => sub {
-            $self->_am_connected(0);
             $self->_clear_connection;
             $self->_clear_connecting_timer;
             my $idle; $idle = AnyEvent->idle(cb => sub {
@@ -86,14 +85,14 @@ has _connection => (
     default => sub {
         my $self = shift;
         #weaken($self);
-        $self->_connecting_timer;
-        AnyEvent::RabbitMQ->new->load_xml_spec()->connect(
+        $self->_start_connecting;
+        AnyEvent::RabbitMQ->new(verbose => 1)->load_xml_spec()->connect(
             host       => $self->hostname,
             port       => $self->port,
             user       => $self->username,
             pass       => $self->password,
             vhost      => $self->vhost,
-            timeout    => $self->timout,
+            timeout    => $self->timeout,
             on_success => sub {
                 $self->connected();
                 $self->_clear_connecting_timer;
