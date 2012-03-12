@@ -40,7 +40,6 @@ has _queue => (
 after '_set_channel' => sub {
     my $self = shift;
     weaken($self);
-    warn "DECLARE QUEUE";
     $self->_channel->declare_queue(
         durable => $self->queue_durable,
         $self->_has_queue_name ? (queue => $self->queue_name) : (),

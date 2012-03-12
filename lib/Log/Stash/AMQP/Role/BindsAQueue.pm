@@ -11,13 +11,11 @@ with qw/
 has bind_routing_key => (
     isa => 'Str',
     is => 'ro',
-    default => 'foo',
+    default => '#',
 );
 
 after [qw[_set_queue _set_exchange]] => sub {
     my $self = shift;
-    warn("HAS SET QUEUE " . $self->_has_queue);
-    warn("HAS SET EXCHANGE " . $self->_has_exchange);
     if ($self->_has_exchange && $self->_has_queue) {
         weaken($self);
         $self->_channel->bind_queue(
@@ -25,7 +23,7 @@ after [qw[_set_queue _set_exchange]] => sub {
            exchange => $self->exchange_name,
            routing_key => $self->bind_routing_key,
            on_success => sub {
-                warn("Bound queue");
+                #warn("Bound queue");
            },
            on_failure => sub {
                 warn("Failed to bind queue");

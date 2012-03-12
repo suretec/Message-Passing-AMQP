@@ -12,6 +12,12 @@ sub BUILD {
     $self->_connection;
 }
 
+has routing_key => (
+    isa => 'Str',
+    is => 'ro',
+    default => '',
+);
+
 sub consume {
     my $self = shift;
     my $data = shift;
@@ -20,11 +26,10 @@ sub consume {
         return;
     }
     my $bytes = $self->encode($data);
-    my $routing_key = 'foo';
     $self->_channel->publish(
         body => $bytes,
         exchange => $self->exchange_name,
-        routing_key => $routing_key,
+        routing_key => $self->routing_key,
     );
 }
 

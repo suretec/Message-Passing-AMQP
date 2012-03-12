@@ -79,14 +79,22 @@ sub connected {
 }
 sub disconnected {}
 
+has _connection_verbose => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
 has _connection => (
     is => 'ro',
     lazy => 1,
     default => sub {
         my $self = shift;
-        #weaken($self);
+        weaken($self);
         $self->_start_connecting;
-        AnyEvent::RabbitMQ->new(verbose => 1)->load_xml_spec()->connect(
+        AnyEvent::RabbitMQ->new(
+            verbose => $self->_connection_verbose,
+        )->load_xml_spec()->connect(
             host       => $self->hostname,
             port       => $self->port,
             user       => $self->username,
