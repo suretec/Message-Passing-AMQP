@@ -9,7 +9,7 @@ $VERSION = eval $VERSION;
 
 =head1 NAME
 
-Log::Stash::AMQP - input and output logstash messages to ZeroMQ.
+Log::Stash::AMQP - input and output logstash messages via AMQP.
 
 =head1 SYNOPSIS
 

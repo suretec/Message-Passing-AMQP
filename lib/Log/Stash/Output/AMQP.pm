@@ -37,7 +37,7 @@ sub consume {
 
 =head1 NAME
 
-Log::Stash::Output::AMQP - output logstash messages to ZeroMQ.
+Log::Stash::Output::AMQP - output logstash messages to AMQP.
 
 =head1 SYNOPSIS
 
@@ -59,10 +59,6 @@ A L<Log::Stash> L<AnyEvent::RabbitMQ> output class.
 
 Can be used as part of a chain of classes with the L<logstash> utility, or directly as
 a logger in normal perl applications.
-
-=head1 CAVEAT
-
-You cannot send AMQP messages and then call fork() and send more ZeroMQ messages!
 
 =head1 METHODS
 
@@ -86,17 +82,9 @@ Sends a message.
 
 =back
 
-=head1 SPONSORSHIP
-
-This module exists due to the wonderful people at Suretec Systems Ltd.
-<http://www.suretecsystems.com/> who sponsored it's development for its
-VoIP division called SureVoIP <http://www.surevoip.co.uk/> for use with
-the SureVoIP API - 
-<http://www.surevoip.co.uk/support/wiki/api_documentation>
-
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
-See L<Log::Stash>.
+See L<Log::Stash::AMQP>.
 
 =cut
 

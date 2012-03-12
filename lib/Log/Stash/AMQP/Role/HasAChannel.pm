@@ -122,7 +122,7 @@ has _connection => (
 
 =head1 NAME
 
-Log::Stash::AMQP::HasAChannel - Role for instances which have a ZMQ socket.
+Log::Stash::AMQP::HasAChannel - Role for instances which have an AMQP channel.
 
 =head1 ATTRIBUTES
 
