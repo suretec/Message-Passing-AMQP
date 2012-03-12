@@ -126,6 +126,15 @@ Log::Stash::AMQP::HasAChannel - Role for instances which have an AMQP channel.
 
 =head1 ATTRIBUTES
 
+=head1 METHODS
+
+=head2 connected
+
+Called when the channel has connected
+
+=head2 disconnected
+
+Called when the channel disconnects.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 

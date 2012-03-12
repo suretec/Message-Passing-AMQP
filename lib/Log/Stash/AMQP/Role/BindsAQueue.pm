@@ -46,7 +46,7 @@ Role for components which cause a single queue to be bound to a single exchange 
 
 =head2 bind_routing_key
 
-Defaults to C<#>, which is a wildcard
+Defaults to C<#>, which matches any routing key.
 
 =head1 CONSUMES
 
