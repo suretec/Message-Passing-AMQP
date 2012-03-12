@@ -1,6 +1,7 @@
 package Log::Stash::AMQP::Role::DeclaresQueue;
 use Moose::Role;
 use Moose::Util::TypeConstraints;
+use Scalar::Util qw/ weaken /;
 use namespace::autoclean;
 
 with 'Log::Stash::AMQP::Role::HasAChannel';
@@ -11,7 +12,8 @@ has queue_name => (
     predicate => '_has_queue_name',
     lazy => 1,
     default => sub {
-        shift->_queue->queue;
+        my $self = shift;
+        $self->_queue->method_frame->queue;
     }
 );
 
@@ -32,11 +34,13 @@ has queue_durable => (
 has _queue => (
     is => 'ro',
     writer => '_set_queue',
+    predicate => '_has_queue',
 );
 
 after '_set_channel' => sub {
     my $self = shift;
     weaken($self);
+    warn "DECLARE QUEUE";
     $self->_channel->declare_queue(
         durable => $self->queue_durable,
         $self->_has_queue_name ? (queue => $self->queue_name) : (),

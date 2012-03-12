@@ -1,9 +1,9 @@
 package Log::Stash::AMQP::Role::BindsAQueue;
 use Moose::Role;
+use Scalar::Util qw/ weaken /;
 use namespace::autoclean;
 
 with qw/
-    Log::Stash::AMQP::Role::BindsQueues
     Log::Stash::AMQP::Role::DeclaresExchange
     Log::Stash::AMQP::Role::DeclaresQueue
 /;
@@ -11,14 +11,27 @@ with qw/
 has bind_routing_key => (
     isa => 'Str',
     is => 'ro',
-    default => '#',
+    default => 'foo',
 );
 
-before BUILD => sub {
+after [qw[_set_queue _set_exchange]] => sub {
     my $self = shift;
-    $self->_exchange;
-    $self->_queue;
-    $self->bind_queue($self->queue_name, $self->exchange_name, $self->bind_routing_key);
+    warn("HAS SET QUEUE " . $self->_has_queue);
+    warn("HAS SET EXCHANGE " . $self->_has_exchange);
+    if ($self->_has_exchange && $self->_has_queue) {
+        weaken($self);
+        $self->_channel->bind_queue(
+           queue => $self->queue_name,
+           exchange => $self->exchange_name,
+           routing_key => $self->bind_routing_key,
+           on_success => sub {
+                warn("Bound queue");
+           },
+           on_failure => sub {
+                warn("Failed to bind queue");
+           },
+        );
+    }
 };
 
 1;

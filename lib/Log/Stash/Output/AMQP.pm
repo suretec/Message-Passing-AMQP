@@ -20,7 +20,7 @@ sub consume {
         return;
     }
     my $bytes = $self->encode($data);
-    my $routing_key = '#';
+    my $routing_key = 'foo';
     $self->_channel->publish(
         body => $bytes,
         exchange => $self->exchange_name,

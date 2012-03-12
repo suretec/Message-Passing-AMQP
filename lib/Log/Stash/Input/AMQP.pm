@@ -1,13 +1,41 @@
 package Log::Stash::Input::AMQP;
 use Moose;
 use AnyEvent;
+use Scalar::Util qw/ weaken refaddr /;
+use Try::Tiny;
 use namespace::autoclean;
 
 with qw/
-    Log::Stash::AMQP::Role::HasAChannel
+    Log::Stash::AMQP::Role::BindsAQueue
     Log::Stash::Role::Input
 /;
 
+sub BUILD {
+    my $self = shift;
+    $self->_connection;
+}
+
+after '_set_queue' => sub {
+    my $self = shift;
+    weaken($self);
+    $self->_channel->consume(
+        on_consume => sub {
+            my $message = shift;
+            try {
+                $self->output_to->consume($self->decode($message->{body}->payload));
+            }
+            catch {
+                warn("Error in consume_message callback: $_");
+            };
+        },
+        consumer_tag => refaddr($self),
+        on_success => sub {
+        },
+        on_failure => sub {
+            Carp::cluck("Failed to start message consumer in $self response " . Dumper(@_));
+        },
+    );
+};
 
 1;
 
