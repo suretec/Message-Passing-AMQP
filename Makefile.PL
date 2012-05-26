@@ -1,8 +1,13 @@
 use strict;
 use warnings;
 use inc::Module::Install;
+use Module::Install::Authority;
 
 all_from 'lib/Message/Passing/AMQP.pm';
+authority('GHENRY');
+resources(
+    repository => "git://github.com/suretec/Message-Passing-AMQP.git",
+);
 
 license 'AGPL_3';
 
