@@ -1,4 +1,4 @@
-package Log::Stash::AMQP::Role::HasAChannel;
+package Message::Passing::AMQP::Role::HasAChannel;
 use Moose::Role;
 use Scalar::Util qw/ weaken /;
 use AnyEvent;
@@ -122,7 +122,7 @@ has _connection => (
 
 =head1 NAME
 
-Log::Stash::AMQP::HasAChannel - Role for instances which have an AMQP channel.
+Message::Passing::AMQP::HasAChannel - Role for instances which have an AMQP channel.
 
 =head1 ATTRIBUTES
 
@@ -138,7 +138,7 @@ Called when the channel disconnects.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
-See L<Log::Stash::AMQP>.
+See L<Message::Passing::AMQP>.
 
 =cut
 

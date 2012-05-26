@@ -1,4 +1,4 @@
-package Log::Stash::Input::AMQP;
+package Message::Passing::Input::AMQP;
 use Moose;
 use AnyEvent;
 use Scalar::Util qw/ weaken refaddr /;
@@ -6,8 +6,8 @@ use Try::Tiny;
 use namespace::autoclean;
 
 with qw/
-    Log::Stash::AMQP::Role::BindsAQueue
-    Log::Stash::Role::Input
+    Message::Passing::AMQP::Role::BindsAQueue
+    Message::Passing::Role::Input
 /;
 
 sub BUILD {
@@ -41,7 +41,7 @@ after '_set_queue' => sub {
 
 =head1 NAME
 
-Log::Stash::Input::AMQP - input logstash messages from AMQP.
+Message::Passing::Input::AMQP - input logstash messages from AMQP.
 
 =head1 DESCRIPTION
 
@@ -49,11 +49,11 @@ Log::Stash::Input::AMQP - input logstash messages from AMQP.
 
 =over
 
-=item L<Log::Stash::AMQP>
+=item L<Message::Passing::AMQP>
 
-=item L<Log::Stash::Output::AMQP>
+=item L<Message::Passing::Output::AMQP>
 
-=item L<Log::Stash>
+=item L<Message::Passing>
 
 =item L<AMQP>
 
@@ -63,7 +63,7 @@ Log::Stash::Input::AMQP - input logstash messages from AMQP.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
-See L<Log::Stash::AMQP>.
+See L<Message::Passing::AMQP>.
 
 =cut
 

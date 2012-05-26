@@ -3,9 +3,9 @@ use warnings;
 
 use Test::More;
 
-use_ok('Log::Stash::AMQP');
-use_ok('Log::Stash::Input::AMQP');
-use_ok('Log::Stash::Output::AMQP');
+use_ok('Message::Passing::AMQP');
+use_ok('Message::Passing::Input::AMQP');
+use_ok('Message::Passing::Output::AMQP');
 
 done_testing;
 

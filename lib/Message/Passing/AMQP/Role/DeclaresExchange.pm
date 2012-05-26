@@ -1,10 +1,10 @@
-package Log::Stash::AMQP::Role::DeclaresExchange;
+package Message::Passing::AMQP::Role::DeclaresExchange;
 use Moose::Role;
 use Moose::Util::TypeConstraints;
 use Scalar::Util qw/ weaken /;
 use namespace::autoclean;
 
-with 'Log::Stash::AMQP::Role::HasAChannel';
+with 'Message::Passing::AMQP::Role::HasAChannel';
 
 has exchange_name => (
     is => 'ro',

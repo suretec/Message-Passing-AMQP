@@ -3,19 +3,19 @@ use warnings;
 use Test::More;
 
 use AnyEvent;
-use Log::Stash::Input::AMQP;
-use Log::Stash::Output::AMQP;
-use Log::Stash::Output::Test;
+use Message::Passing::Input::AMQP;
+use Message::Passing::Output::AMQP;
+use Message::Passing::Output::Test;
 
 my $cv = AnyEvent->condvar;
-my $input = Log::Stash::Input::AMQP->new(
+my $input = Message::Passing::Input::AMQP->new(
     exchange_name => "log_stash_test",
-    output_to => Log::Stash::Output::Test->new(
+    output_to => Message::Passing::Output::Test->new(
         on_consume_cb => sub { $cv->send }
     ),
 );
 
-my $output = Log::Stash::Output::AMQP->new(
+my $output = Message::Passing::Output::AMQP->new(
     exchange_name => "log_stash_test",
 );
 

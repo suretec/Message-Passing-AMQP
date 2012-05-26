@@ -1,11 +1,11 @@
-package Log::Stash::AMQP::Role::BindsAQueue;
+package Message::Passing::AMQP::Role::BindsAQueue;
 use Moose::Role;
 use Scalar::Util qw/ weaken /;
 use namespace::autoclean;
 
 with qw/
-    Log::Stash::AMQP::Role::DeclaresExchange
-    Log::Stash::AMQP::Role::DeclaresQueue
+    Message::Passing::AMQP::Role::DeclaresExchange
+    Message::Passing::AMQP::Role::DeclaresQueue
 /;
 
 has bind_routing_key => (
@@ -36,7 +36,7 @@ after [qw[_set_queue _set_exchange]] => sub {
 
 =head1 NAME
 
-Log::Stash::AMQP::Role::BindsAQueue
+Message::Passing::AMQP::Role::BindsAQueue
 
 =head1 DESCRIPTION
 
@@ -52,11 +52,11 @@ Defaults to C<#>, which matches any routing key.
 
 =over
 
-=item L<Log::Stash::AMQP::Role::BindsQueues>
+=item L<Message::Passing::AMQP::Role::BindsQueues>
 
-=item L<Log::Stash::AMQP::Role::DeclaresExchange>
+=item L<Message::Passing::AMQP::Role::DeclaresExchange>
 
-=item L<Log::Stash::AMQP::Role::DeclaresQueue>
+=item L<Message::Passing::AMQP::Role::DeclaresQueue>
 
 =back
 

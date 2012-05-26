@@ -1,10 +1,10 @@
-package Log::Stash::Output::AMQP;
+package Message::Passing::Output::AMQP;
 use Moose;
 use namespace::autoclean;
 
 with qw/
-    Log::Stash::AMQP::Role::DeclaresExchange
-    Log::Stash::Role::Output
+    Message::Passing::AMQP::Role::DeclaresExchange
+    Message::Passing::Role::Output
 /;
 
 sub BUILD {
@@ -37,17 +37,17 @@ sub consume {
 
 =head1 NAME
 
-Log::Stash::Output::AMQP - output logstash messages to AMQP.
+Message::Passing::Output::AMQP - output logstash messages to AMQP.
 
 =head1 SYNOPSIS
 
-    use Log::Stash::Output::AMQP;
+    use Message::Passing::Output::AMQP;
 
-    my $logger = Log::Stash::Output::AMQP->new;
+    my $logger = Message::Passing::Output::AMQP->new;
     $logger->consume({data => { some => 'data'}, '@metadata' => 'value' });
 
     # You are expected to produce a logstash message format compatible message,
-    # see the documentation in Log::Stash for more details.
+    # see the documentation in Message::Passing for more details.
 
     # Or use directly on command line:
     logstash --input STDIN --output AMQP
@@ -55,7 +55,7 @@ Log::Stash::Output::AMQP - output logstash messages to AMQP.
 
 =head1 DESCRIPTION
 
-A L<Log::Stash> L<AnyEvent::RabbitMQ> output class.
+A L<Message::Passing> L<AnyEvent::RabbitMQ> output class.
 
 Can be used as part of a chain of classes with the L<logstash> utility, or directly as
 a logger in normal perl applications.
@@ -70,11 +70,11 @@ Sends a message.
 
 =over
 
-=item L<Log::Stash::AMQP>
+=item L<Message::Passing::AMQP>
 
-=item L<Log::Stash::Input::AMQP>
+=item L<Message::Passing::Input::AMQP>
 
-=item L<Log::Stash>
+=item L<Message::Passing>
 
 =item L<AMQP>
 
@@ -84,7 +84,7 @@ Sends a message.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
-See L<Log::Stash::AMQP>.
+See L<Message::Passing::AMQP>.
 
 =cut
 

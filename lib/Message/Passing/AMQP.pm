@@ -1,4 +1,4 @@
-package Log::Stash::AMQP;
+package Message::Passing::AMQP;
 use Moose ();
 use namespace::autoclean;
 
@@ -9,7 +9,7 @@ $VERSION = eval $VERSION;
 
 =head1 NAME
 
-Log::Stash::AMQP - input and output logstash messages via AMQP.
+Message::Passing::AMQP - input and output logstash messages via AMQP.
 
 =head1 SYNOPSIS
 
@@ -23,17 +23,17 @@ Log::Stash::AMQP - input and output logstash messages via AMQP.
 
 =head1 DESCRIPTION
 
-A L<AnyEvent::RabbitMQ> transport for L<Log::Stash>.
+A L<AnyEvent::RabbitMQ> transport for L<Message::Passing>.
 
 =head1 SEE ALSO
 
 =over
 
-=item L<Log::Stash::Output::AMQP>
+=item L<Message::Passing::Output::AMQP>
 
-=item L<Log::Stash::Input::AMQP>
+=item L<Message::Passing::Input::AMQP>
 
-=item L<Log::Stash>
+=item L<Message::Passing>
 
 =item L<AnyEvent::RabbitMQ>
 

@@ -1,5 +1,5 @@
 NAME
-    Log::Stash::AMQP - input and output logstash messages to ZeroMQ.
+    Message::Passing::AMQP - input and output logstash messages to ZeroMQ.
 
 SYNOPSIS
         # Terminal 1:
@@ -11,12 +11,12 @@ SYNOPSIS
         {"data":{"some":"data"},"@metadata":"value"}
 
 DESCRIPTION
-    A AnyEvent::RabbitMQ transport for Log::Stash.
+    A AnyEvent::RabbitMQ transport for Message::Passing.
 
 SEE ALSO
-    Log::Stash::Output::AMQP
-    Log::Stash::Input::AMQP
-    Log::Stash
+    Message::Passing::Output::AMQP
+    Message::Passing::Input::AMQP
+    Message::Passing
     AnyEvent::RabbitMQ
 
 AUTHOR

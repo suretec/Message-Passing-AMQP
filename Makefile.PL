@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use inc::Module::Install;
 
-all_from 'lib/Log/Stash/AMQP.pm';
+all_from 'lib/Message/Passing/AMQP.pm';
 
 license 'AGPL_3';
 
@@ -14,7 +14,7 @@ requires 'JSON';
 requires 'JSON::XS';
 requires 'Try::Tiny';
 requires 'Task::Weaken';
-requires 'Log::Stash' => '0.001';
+requires 'Message::Passing' => '0.001';
 
 test_requires 'Test::More' => '0.88';
 
@@ -28,7 +28,7 @@ author_requires 'Test::Spelling';
 author_tests 't/author';
 
 if ($Module::Install::AUTHOR) {
-    system("pod2text lib/Log/Stash/AMQP.pm > README")
+    system("pod2text lib/Message/Passing/AMQP.pm > README")
         and die $!;
 }
 
