@@ -18,12 +18,14 @@ requires 'Message::Passing' => '0.001';
 
 test_requires 'Test::More' => '0.88';
 
-author_requires 'Test::Pod' => '1.14';
-author_requires 'Test::NoTabs';
-author_requires 'Test::Pod::Coverage' => '1.04';
-author_requires 'Pod::Coverage' => '0.19';
-author_requires 'Pod::Coverage::TrustPod';
-author_requires 'Test::Spelling';
+author_requires(
+    'Test::Pod' => '1.14',
+    'Test::NoTabs' => '0',
+    'Test::Pod::Coverage' => '1.04',
+    'Pod::Coverage' => '0.19',
+    'Pod::Coverage::TrustPod' => '0',
+    'Test::Spelling' => '0',
+);
 
 author_tests 't/author';
 
