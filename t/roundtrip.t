@@ -11,18 +11,21 @@ my $cv = AnyEvent->condvar;
 my $input = Message::Passing::Input::AMQP->new(
     exchange_name => "log_stash_test",
     output_to => Message::Passing::Output::Test->new(
-        on_consume_cb => sub { $cv->send }
+        cb => sub { $cv->send }
     ),
 );
 
-#my $output = Message::Passing::Output::AMQP->new(
-#    exchange_name => "log_stash_test",
-#);
+my $output = Message::Passing::Output::AMQP->new(
+    exchange_name => "log_stash_test",
+);
 
 my $this_cv = AnyEvent->condvar;
-my $timer; $timer = AnyEvent->timer(after => 2, cb => sub { undef $timer; $this_cv->send });
+my $timer; $timer = AnyEvent->timer(after => 2, cb => sub {
+    undef $timer;
+    $this_cv->send;
+});
 $this_cv->recv;
-#$output->consume({foo => 'bar'});
+$output->consume({foo => 'bar'});
 $cv->recv;
 
 is $input->output_to->message_count, 1;

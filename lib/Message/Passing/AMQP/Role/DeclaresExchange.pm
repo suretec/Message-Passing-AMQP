@@ -33,7 +33,6 @@ has _exchange => (
 after _set_channel => sub {
     my $self = shift;
     weaken($self);
-    Carp::cluck "DECLARE EXCHANGE";
     $self->_channel->declare_exchange(
         type => $self->exchange_type,
         durable => $self->exchange_durable,
