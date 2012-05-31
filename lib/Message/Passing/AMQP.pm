@@ -14,11 +14,11 @@ Message::Passing::AMQP - input and output logstash messages via AMQP.
 =head1 SYNOPSIS
 
     # Terminal 1:
-    $ logstash --input STDIN --output AMQP --output_options '{"connect":"tcp://127.0.0.1:5558"}'
+    $ logstash --input STDIN --output AMQP --output_options '{FIXME}'
     {"data":{"some":"data"},"@metadata":"value"}
 
     # Terminal 2:
-    $ logstash --output STDOUT --input AMQP --input_options '{"socket_bind":"tcp://*:5558"}'
+    $ logstash --output STDOUT --input AMQP --input_options '{FIXME}'
     {"data":{"some":"data"},"@metadata":"value"}
 
 =head1 DESCRIPTION
