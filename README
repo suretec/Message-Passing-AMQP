@@ -1,5 +1,5 @@
 NAME
-    Message::Passing::AMQP - input and output logstash messages to ZeroMQ.
+    Message::Passing::AMQP - input and output logstash messages via AMQP.
 
 SYNOPSIS
         # Terminal 1:

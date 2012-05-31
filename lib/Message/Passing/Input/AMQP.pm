@@ -10,10 +10,6 @@ with qw/
     Message::Passing::Role::Input
 /;
 
-sub BUILD {
-    my $self = shift;
-    $self->_connection;
-}
 
 after '_set_queue' => sub {
     my $self = shift;

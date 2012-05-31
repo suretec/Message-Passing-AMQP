@@ -7,11 +7,6 @@ with qw/
     Message::Passing::Role::Output
 /;
 
-sub BUILD {
-    my $self = shift;
-    $self->_connection;
-}
-
 has routing_key => (
     isa => 'Str',
     is => 'ro',

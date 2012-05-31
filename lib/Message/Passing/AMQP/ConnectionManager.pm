@@ -4,6 +4,7 @@ use Scalar::Util qw/ weaken /;
 use AnyEvent;
 use AnyEvent::RabbitMQ;
 use Carp qw/ croak /;
+use Try::Tiny qw/ try /;
 use namespace::autoclean;
 
 with 'Message::Passing::Role::ConnectionManager';
@@ -26,21 +27,50 @@ has [qw/ username password /] => (
     default => 'guest',
 );
 
+has vhost => (
+    is => 'ro',
+    isa => 'Str',
+    default => sub { '/' },
+);
+
+has timeout => (
+    is => 'ro',
+    isa => 'Int',
+    default => sub { 30 },
+);
+
+has verbose => (
+    is => 'ro',
+    isa => 'Bool',
+    default => sub { 0 },
+);
+
 sub _build_connection {
     my $self = shift;
     weaken($self);
-    my $client = AnyEvent::RabbitMQ->connect(
-        
+    my $client = AnyEvent::RabbitMQ->new(
+            verbose => $self->verbose,
     );
-    $client->reg_cb(CONNECTED => -2000 => sub {
-        my ($client, $handle, $host, $port, $retry) = @_;
-        $self->_set_connected(1);
-    });
-    $client->reg_cb(connect_error =>  sub {
-        my ($client, $errmsg) = @_;
-        warn("CONNECT ERROR $errmsg");
-        $self->_clear_connection;
-    });
+    try { $client->load_xml_spec };
+    $client->connect(
+        host       => $self->hostname,
+        port       => $self->port,
+        user       => $self->username,
+        pass       => $self->password,
+        vhost      => $self->vhost,
+        timeout    => $self->timeout,
+        on_success => sub {
+            $self->_set_connected(1);
+        },
+        on_failure => sub {
+            warn("CONNECT ERROR");
+            $self->_clear_connection;
+        },
+        on_close => sub {
+            warn("CLOSED");
+            $self->_clear_connection;
+        },
+    );
     return $client;
 }
 
