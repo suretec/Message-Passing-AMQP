@@ -64,11 +64,11 @@ sub _build_connection {
         },
         on_failure => sub {
             warn("CONNECT ERROR");
-            $self->_clear_connection;
+            $self->_set_connected(0);
         },
         on_close => sub {
             warn("CLOSED");
-            $self->_clear_connection;
+            $self->_set_connected(0);
         },
     );
     return $client;
