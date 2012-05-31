@@ -31,7 +31,7 @@ use Message::Passing::AMQP::ConnectionManager;
 sub _build_connection_manager {
     my $self = shift;
     Message::Passing::AMQP::ConnectionManager->new(map { $_ => $self->$_() }
-        qw/ username password vhost hostname /
+        qw/ username port password vhost hostname /
     );
 }
 

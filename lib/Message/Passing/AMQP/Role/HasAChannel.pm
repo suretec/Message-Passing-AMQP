@@ -16,6 +16,7 @@ has _channel => (
 sub connected {
     my $self = shift;
     weaken($self);
+    warn "CONNECTED";
     $self->_connection->open_channel(
         on_success => sub {
             my $channel = shift;

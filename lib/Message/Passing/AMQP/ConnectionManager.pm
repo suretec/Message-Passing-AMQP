@@ -42,16 +42,15 @@ has timeout => (
 has verbose => (
     is => 'ro',
     isa => 'Bool',
-    default => sub { 0 },
+    default => sub { 1 },
 );
 
+my $client ||=  AnyEvent::RabbitMQ->new(
+    verbose => 1,
+)->load_xml_spec;
 sub _build_connection {
     my $self = shift;
     weaken($self);
-    my $client = AnyEvent::RabbitMQ->new(
-            verbose => $self->verbose,
-    );
-    try { $client->load_xml_spec };
     $client->connect(
         host       => $self->hostname,
         port       => $self->port,
@@ -60,6 +59,7 @@ sub _build_connection {
         vhost      => $self->vhost,
         timeout    => $self->timeout,
         on_success => sub {
+            warn "CONNECTED";
             $self->_set_connected(1);
         },
         on_failure => sub {
