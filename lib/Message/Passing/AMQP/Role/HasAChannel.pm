@@ -14,10 +14,10 @@ has _channel => (
 );
 
 sub connected {
-    my $self = shift;
+    my ($self, $connection) = @_;
     weaken($self);
     warn "CONNECTED";
-    $self->_connection->open_channel(
+    $connection->open_channel(
         on_success => sub {
             my $channel = shift;
             $self->_set_channel($channel);
