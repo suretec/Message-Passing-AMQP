@@ -14,7 +14,7 @@ has bind_routing_key => (
     default => '#',
 );
 
-after [qw[_set_queue _set_exchange]] => sub {
+after [qw[_set_queue ]] => sub {
     my $self = shift;
     if ($self->_has_exchange && $self->_has_queue) {
         weaken($self);

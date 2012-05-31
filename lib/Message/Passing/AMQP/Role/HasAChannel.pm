@@ -20,6 +20,7 @@ sub connected {
     $connection->open_channel(
         on_success => sub {
             my $channel = shift;
+            warn "SET CHANNEL";
             $self->_set_channel($channel);
         },
         on_failure => sub {
