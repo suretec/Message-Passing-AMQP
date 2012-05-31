@@ -11,7 +11,7 @@ has hostname => (
 has port => (
     is => 'ro',
     isa => 'Int',
-    default => 6163,
+    default => 5672,
 );
 
 has vhost => (

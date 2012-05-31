@@ -12,25 +12,25 @@ with 'Message::Passing::Role::ConnectionManager';
 has hostname => (
     is => 'ro',
     isa => 'Str',
-    default => 'localhost',
+    required => 1,
 );
 
 has port => (
     is => 'ro',
     isa => 'Int',
-    default => 6163,
+    required => 1,
 );
 
 has [qw/ username password /] => (
     is => 'ro',
     isa => 'Str',
-    default => 'guest',
+    required => 1,
 );
 
 has vhost => (
     is => 'ro',
     isa => 'Str',
-    default => sub { '/' },
+    required => 1,
 );
 
 has timeout => (
