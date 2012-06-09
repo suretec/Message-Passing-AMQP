@@ -16,6 +16,10 @@ has routing_key => (
 sub consume {
     my $self = shift;
     my $data = shift;
+    if (ref $data) {
+        warn("Passed non-serialized data - is a perl reference. Dropping.\n");
+        return;
+    }
     unless ($self->_exchange) {
         warn("No exchange yet, dropping message");
         return;

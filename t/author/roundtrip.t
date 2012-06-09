@@ -6,17 +6,26 @@ use AnyEvent;
 use Message::Passing::Input::AMQP;
 use Message::Passing::Output::AMQP;
 use Message::Passing::Output::Test;
+use Message::Passing::Filter::Encoder::JSON;
+use Message::Passing::Filter::Decoder::JSON;
 
 my $cv = AnyEvent->condvar;
 my $input = Message::Passing::Input::AMQP->new(
     exchange_name => "log_stash_test",
-    output_to => Message::Passing::Output::Test->new(
-        cb => sub { $cv->send }
+    queue_name => "log_stash_test",
+    output_to => Message::Passing::Filter::Decoder::JSON->new(
+        output_to => Message::Passing::Output::Test->new(
+            cb => sub { $cv->send }
+        ),
     ),
+#    verbose => 1,
 );
 
-my $output = Message::Passing::Output::AMQP->new(
-    exchange_name => "log_stash_test",
+my $output = Message::Passing::Filter::Encoder::JSON->new(
+    output_to => Message::Passing::Output::AMQP->new(
+        exchange_name => "log_stash_test",
+#        verbose => 1,
+    ),
 );
 
 my $this_cv = AnyEvent->condvar;
@@ -33,8 +42,8 @@ $timer = AnyEvent->timer(after => 2, cb => sub {
 });
 $cv->recv;
 
-is $input->output_to->message_count, 1;
-is_deeply([$input->output_to->messages], [{foo => 'bar'}]);
+is $input->output_to->output_to->message_count, 1;
+is_deeply([$input->output_to->output_to->messages], [{foo => 'bar'}]);
 
 done_testing;
 
