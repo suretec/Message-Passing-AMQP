@@ -35,27 +35,17 @@ sub consume {
 
 =head1 NAME
 
-Message::Passing::Output::AMQP - output logstash messages to AMQP.
+Message::Passing::Output::AMQP - output messages to AMQP.
 
 =head1 SYNOPSIS
 
-    use Message::Passing::Output::AMQP;
-
-    my $logger = Message::Passing::Output::AMQP->new;
-    $logger->consume({data => { some => 'data'}, '@metadata' => 'value' });
-
-    # You are expected to produce a logstash message format compatible message,
-    # see the documentation in Message::Passing for more details.
-
-    # Or use directly on command line:
-    logstash --input STDIN --output AMQP
-    {"data":{"some":"data"},"@metadata":"value"}
+    message-pass --input STDIN --output AMQP --output_options '{"exchange_name":"test"}'
 
 =head1 DESCRIPTION
 
 A L<Message::Passing> L<AnyEvent::RabbitMQ> output class.
 
-Can be used as part of a chain of classes with the L<logstash> utility, or directly as
+Can be used as part of a chain of classes with the L<message-pass> utility, or directly as
 a logger in normal perl applications.
 
 =head1 METHODS

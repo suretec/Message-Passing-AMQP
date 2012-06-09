@@ -39,6 +39,10 @@ after '_set_queue' => sub {
 
 Message::Passing::Input::AMQP - input logstash messages from AMQP.
 
+=head1 SYNOPSIS
+
+    message-pass --output STDOUT --input AMQP --input_options '{"queue_name":"test","exchange_name":"test"}'
+
 =head1 DESCRIPTION
 
 =head1 SEE ALSO
