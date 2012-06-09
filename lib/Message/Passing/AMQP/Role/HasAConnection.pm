@@ -26,12 +26,18 @@ has [qw/ username password /] => (
     default => 'guest',
 );
 
+has verbose => (
+    is => 'ro',
+    isa => 'Bool',
+    default => sub { 0 },
+);
+
 with 'Message::Passing::Role::HasAConnection';
 use Message::Passing::AMQP::ConnectionManager;
 sub _build_connection_manager {
     my $self = shift;
     Message::Passing::AMQP::ConnectionManager->new(map { $_ => $self->$_() }
-        qw/ username port password vhost hostname /
+        qw/ username port password vhost hostname verbose /
     );
 }
 
