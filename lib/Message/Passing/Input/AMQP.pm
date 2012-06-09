@@ -18,7 +18,7 @@ after '_set_queue' => sub {
         on_consume => sub {
             my $message = shift;
             try {
-                $self->output_to->consume($self->decode($message->{body}->payload));
+                $self->output_to->consume($message->{body}->payload);
             }
             catch {
                 warn("Error in consume_message callback: $_");

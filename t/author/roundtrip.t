@@ -26,6 +26,11 @@ my $timer; $timer = AnyEvent->timer(after => 2, cb => sub {
 });
 $this_cv->recv;
 $output->consume({foo => 'bar'});
+$timer = AnyEvent->timer(after => 2, cb => sub {
+    undef $timer;
+    fail("timed out");
+    $cv->send;
+});
 $cv->recv;
 
 is $input->output_to->message_count, 1;

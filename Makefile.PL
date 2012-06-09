@@ -19,7 +19,7 @@ requires 'JSON';
 requires 'JSON::XS';
 requires 'Try::Tiny';
 requires 'Task::Weaken';
-requires 'Message::Passing' => '0.001';
+requires 'Message::Passing' => '0.006';
 
 test_requires 'Test::More' => '0.88';
 

@@ -20,9 +20,8 @@ sub consume {
         warn("No exchange yet, dropping message");
         return;
     }
-    my $bytes = $self->encode($data);
     $self->_channel->publish(
-        body => $bytes,
+        body => $data,
         exchange => $self->exchange_name,
         routing_key => $self->routing_key,
     );
