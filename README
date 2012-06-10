@@ -1,17 +1,23 @@
 NAME
-    Message::Passing::AMQP - input and output logstash messages via AMQP.
+    Message::Passing::AMQP - input and output message-pass messages via
+    AMQP.
 
 SYNOPSIS
         # Terminal 1:
-        $ logstash --input STDIN --output AMQP --output_options '{FIXME}'
+        $ message-pass --input STDIN --output AMQP --output_options '{"exchange_name":"test"}'
         {"data":{"some":"data"},"@metadata":"value"}
 
         # Terminal 2:
-        $ logstash --output STDOUT --input AMQP --input_options '{FIXME}'
+        $ message-pass --output STDOUT --input AMQP --input_options '{"queue_name":"test","exchange_name":"test"}'
         {"data":{"some":"data"},"@metadata":"value"}
 
 DESCRIPTION
-    A AnyEvent::RabbitMQ transport for Message::Passing.
+    An AMQP adaptor for Message::Passing for speaking to AMQP servers, for
+    example RabbitMQ <http://www.rabbitmq.com/> or QPID.
+
+PROTOCOL VERSION
+    This adaptor uses the 0.8 version of the AMQP protocol, as currently
+    shipped with AnyEvent::RabbitMQ.
 
 SEE ALSO
     Message::Passing::Output::AMQP
