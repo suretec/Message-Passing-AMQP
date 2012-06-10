@@ -4,6 +4,9 @@ use Test::More;
 use Test::Spelling;
 
 add_stopwords(qw(
+    QPID
+    RabbitMQ
+    adaptor
     lossy
     AMQP's
     Starman
