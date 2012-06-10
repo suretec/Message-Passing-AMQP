@@ -19,12 +19,16 @@ my $input = Message::Passing::Input::AMQP->new(
         ),
     ),
     hostname => '127.0.0.1',
+    username => 'guest',
+    password => 'guest',
 #    verbose => 1,
 );
 
 my $output = Message::Passing::Filter::Encoder::JSON->new(
     output_to => Message::Passing::Output::AMQP->new(
         hostname => '127.0.0.1',
+        username => 'guest',
+        password => 'guest',
         exchange_name => "log_stash_test",
 #        verbose => 1,
     ),

@@ -9,15 +9,10 @@ use namespace::autoclean;
 with qw/
     Message::Passing::Role::ConnectionManager
     Message::Passing::Role::HasHostnameAndPort
+    Message::Passing::Role::HasUsernameAndPassword
 /;
 
 sub _default_port { 5672 }
-
-has [qw/ username password /] => (
-    is => 'ro',
-    isa => 'Str',
-    required => 1,
-);
 
 has vhost => (
     is => 'ro',

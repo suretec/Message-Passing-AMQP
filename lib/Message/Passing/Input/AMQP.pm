@@ -42,7 +42,7 @@ Message::Passing::Input::AMQP - input logstash messages from AMQP.
 
 =head1 SYNOPSIS
 
-    message-pass --output STDOUT --input AMQP --input_options '{"queue_name":"test","exchange_name":"test"}'
+    message-pass --output STDOUT --input AMQP --input_options '{"queue_name":"test","exchange_name":"test","hostname":"127.0.0.1","username":"guest","password":"guest"}'
 
 =head1 DESCRIPTION
 

@@ -6,6 +6,7 @@ use namespace::autoclean;
 with qw/
     Message::Passing::Role::HasAConnection
     Message::Passing::Role::HasHostnameAndPort
+    Message::Passing::Role::HasUsernameAndPassword
 /;
 
 sub _default_port { 5672 }
@@ -14,12 +15,6 @@ has vhost => (
     is => 'ro',
     isa => 'Str',
     default => sub { '/' },
-);
-
-has [qw/ username password /] => (
-    is => 'ro',
-    isa => 'Str',
-    default => 'guest',
 );
 
 has verbose => (
