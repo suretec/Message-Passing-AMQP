@@ -1,3 +1,4 @@
+0.002
   - Fix SYNOPSIS in documentation.
   - Add timeouts to tests to avoid hangs when they fail.
   - Fix for latest version of Message::Passing.
