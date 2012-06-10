@@ -1,18 +1,14 @@
 package Message::Passing::AMQP::Role::HasAConnection;
 use Moose::Role;
+use Message::Passing::AMQP::ConnectionManager;
 use namespace::autoclean;
 
-has hostname => (
-    is => 'ro',
-    isa => 'Str',
-    default => 'localhost',
-);
+with qw/
+    Message::Passing::Role::HasAConnection
+    Message::Passing::Role::HasHostnameAndPort
+/;
 
-has port => (
-    is => 'ro',
-    isa => 'Int',
-    default => 5672,
-);
+sub _default_port { 5672 }
 
 has vhost => (
     is => 'ro',
@@ -32,8 +28,6 @@ has verbose => (
     default => sub { 0 },
 );
 
-with 'Message::Passing::Role::HasAConnection';
-use Message::Passing::AMQP::ConnectionManager;
 sub _build_connection_manager {
     my $self = shift;
     Message::Passing::AMQP::ConnectionManager->new(map { $_ => $self->$_() }

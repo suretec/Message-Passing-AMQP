@@ -4,22 +4,14 @@ use Scalar::Util qw/ weaken /;
 use AnyEvent;
 use AnyEvent::RabbitMQ;
 use Carp qw/ croak /;
-use Try::Tiny qw/ try /;
 use namespace::autoclean;
 
-with 'Message::Passing::Role::ConnectionManager';
+with qw/
+    Message::Passing::Role::ConnectionManager
+    Message::Passing::Role::HasHostnameAndPort
+/;
 
-has hostname => (
-    is => 'ro',
-    isa => 'Str',
-    required => 1,
-);
-
-has port => (
-    is => 'ro',
-    isa => 'Int',
-    required => 1,
-);
+sub _default_port { 5672 }
 
 has [qw/ username password /] => (
     is => 'ro',

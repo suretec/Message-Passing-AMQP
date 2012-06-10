@@ -18,11 +18,13 @@ my $input = Message::Passing::Input::AMQP->new(
             cb => sub { $cv->send }
         ),
     ),
+    hostname => '127.0.0.1',
 #    verbose => 1,
 );
 
 my $output = Message::Passing::Filter::Encoder::JSON->new(
     output_to => Message::Passing::Output::AMQP->new(
+        hostname => '127.0.0.1',
         exchange_name => "log_stash_test",
 #        verbose => 1,
     ),
