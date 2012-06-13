@@ -1,3 +1,4 @@
+0.003
   - Use core Message::Passing::Role::HasHostnameAndPort
   - Use core Message::Passing::Role::HasUsernameAndPassword
   - username, password, hostname attributes no longer default
