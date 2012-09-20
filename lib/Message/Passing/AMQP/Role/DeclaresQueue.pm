@@ -37,10 +37,17 @@ has _queue => (
     predicate => '_has_queue',
 );
 
+has queue_arguments => (
+    isa => 'HashRef',
+    is => 'ro',
+    default => sub { {} }, # E.g. 'x-ha-policy' => 'all'
+);
+
 after '_set_channel' => sub {
     my $self = shift;
     weaken($self);
     $self->_channel->declare_queue(
+        arguments => $self->queue_arguments,
         durable => $self->queue_durable,
         $self->_has_queue_name ? (queue => $self->queue_name) : (),
         on_success => sub {
