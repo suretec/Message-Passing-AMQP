@@ -31,6 +31,12 @@ has queue_durable => (
     default => 1,
 );
 
+has queue_exclusive => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
 has _queue => (
     is => 'ro',
     writer => '_set_queue',
@@ -49,6 +55,7 @@ after '_set_channel' => sub {
     $self->_channel->declare_queue(
         arguments => $self->queue_arguments,
         durable => $self->queue_durable,
+        exclusive => $self->queue_exclusive,
         $self->_has_queue_name ? (queue => $self->queue_name) : (),
         on_success => sub {
             $self->_set_queue(shift());

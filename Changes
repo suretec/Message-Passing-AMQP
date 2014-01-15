@@ -1,3 +1,5 @@
+  - Add support for making queues exclusive.
+
 0.003
   - Use core Message::Passing::Role::HasHostnameAndPort
   - Use core Message::Passing::Role::HasUsernameAndPassword
