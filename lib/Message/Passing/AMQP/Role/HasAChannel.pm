@@ -35,7 +35,7 @@ sub disconnected {}
 
 =head1 NAME
 
-Message::Passing::AMQP::HasAChannel - Role for instances which have an AMQP channel.
+Message::Passing::AMQP::Role::HasAChannel - Role for instances which have an AMQP channel.
 
 =head1 ATTRIBUTES
 
