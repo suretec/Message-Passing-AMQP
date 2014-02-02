@@ -28,6 +28,8 @@ add_stopwords(qw(
     STDERR
     logstash
     centralised
+    vhost
+    fanout
 ));
 set_spell_cmd('aspell list -l en');
 all_pod_files_spelling_ok();

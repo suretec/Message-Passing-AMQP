@@ -27,3 +27,22 @@ sub _connection_manager_attributes { [qw/ username password hostname port vhost 
 
 1;
 
+=head1 NAME
+
+Message::Passing::AMQP::Role::HasAConnection - Implements the Message::Passing::Role::HasAConnection interface..
+
+=head1 ATTRIBUTES
+
+=head2 vhost
+
+Gets passed to L<Message::Passing::AMQP::ConnectionManager>, defaults to '/'.
+
+=head2 verbose
+
+Gets passed to L<Message::Passing::AMQP::ConnectionManager>, defaults to false.
+
+=head1 AUTHOR, COPYRIGHT AND LICENSE
+
+See L<Message::Passing::AMQP>.
+
+=cut

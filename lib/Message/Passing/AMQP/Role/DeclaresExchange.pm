@@ -47,3 +47,27 @@ after _set_channel => sub {
 };
 
 1;
+
+=head1 NAME
+
+Message::Passing::AMQP::Role::DeclaresExchange - Role for instances which have an AMQP exchange.
+
+=head1 ATTRIBUTES
+
+=head2 exchange_name
+
+Defines the exchange name, required.
+
+=head2 exchange_type
+
+Is one of topic, direct or fanout, defaults to topic.
+
+=head2 exchange_durable
+
+Defines if the exchange is durable, defaults to true.
+
+=head1 AUTHOR, COPYRIGHT AND LICENSE
+
+See L<Message::Passing::AMQP>.
+
+=cut

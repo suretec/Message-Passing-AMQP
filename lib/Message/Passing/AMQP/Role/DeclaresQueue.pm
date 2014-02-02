@@ -68,3 +68,35 @@ after '_set_channel' => sub {
 };
 
 1;
+
+=head1 NAME
+
+Message::Passing::AMQP::Role::DeclaresQueue - Role for instances which have an AMQP queue.
+
+=head1 ATTRIBUTES
+
+=head2 queue_name
+
+Defines the queue name, defaults to the name returned by the server.
+
+=head2 queue_type
+
+Is one of topic, direct or fanout, defaults to topic.
+
+=head2 queue_durable
+
+Defines if the queue is durable, defaults to true.
+
+=head2 queue_exclusive
+
+Defines if the queue is exclusive, defaults to false.
+
+=head2 queue_arguments
+
+Defines queue arguments, defaults to an empty hashref.
+
+=head1 AUTHOR, COPYRIGHT AND LICENSE
+
+See L<Message::Passing::AMQP>.
+
+=cut

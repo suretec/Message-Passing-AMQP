@@ -66,3 +66,26 @@ sub _build_connection {
 __PACKAGE__->meta->make_immutable;
 1;
 
+=head1 NAME
+
+Message::Passing::AMQP::ConnectionManager - Implements the Message::Passing::Role::HasAConnection interface.
+
+=head1 ATTRIBUTES
+
+=head2 vhost
+
+Passed to L<AnyEvent::RabbitMQ>->new->connect.
+
+=head2 timeout
+
+Passed to L<AnyEvent::RabbitMQ>->new->connect.
+
+=head2 verbose
+
+Passed to L<AnyEvent::RabbitMQ>->new.
+
+=head1 AUTHOR, COPYRIGHT AND LICENSE
+
+See L<Message::Passing::AMQP>.
+
+=cut
