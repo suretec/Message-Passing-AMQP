@@ -37,6 +37,13 @@ has queue_exclusive => (
     default => 0,
 );
 
+has queue_auto_delete => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
+
 has _queue => (
     is => 'ro',
     writer => '_set_queue',
@@ -56,6 +63,7 @@ after '_set_channel' => sub {
         arguments => $self->queue_arguments,
         durable => $self->queue_durable,
         exclusive => $self->queue_exclusive,
+        auto_delete => $self->queue_auto_delete,
         $self->_has_queue_name ? (queue => $self->queue_name) : (),
         on_success => sub {
             $self->_set_queue(shift());
