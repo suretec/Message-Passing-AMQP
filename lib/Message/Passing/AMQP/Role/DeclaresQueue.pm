@@ -103,6 +103,14 @@ Defines if the queue is exclusive, defaults to false.
 
 Defines queue arguments, defaults to an empty hashref.
 
+=head2 queue_exclusive
+
+If true, the queue is flagged as exclusive.  Defaults to false.
+
+=head2 queue_auto_delete
+
+If true, the queue is flagged as auto-delete.  Defaults to false.
+
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
 See L<Message::Passing::AMQP>.
