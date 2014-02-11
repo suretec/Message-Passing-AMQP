@@ -1,3 +1,4 @@
+  - Add support for making queues auto-delete.
   - Add support for making queues exclusive.
   - Add documentation to roles.
 
