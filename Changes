@@ -1,3 +1,5 @@
+  - Fix TLS support
+
 0.004  2015-04-01 16:53:00+01:00 Europe/Vienna
   - Add support for making queues auto-delete.
   - Add support for making queues exclusive.

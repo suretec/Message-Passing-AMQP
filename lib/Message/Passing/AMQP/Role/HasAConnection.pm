@@ -10,6 +10,12 @@ with qw/
 
 sub _default_port { 5672 }
 
+has tls => (
+    is => 'ro',
+    isa => 'Bool',
+    default => sub { 0 },
+);
+
 has vhost => (
     is => 'ro',
     isa => 'Str',
@@ -23,7 +29,7 @@ has verbose => (
 );
 
 sub _connection_manager_class { 'Message::Passing::AMQP::ConnectionManager' }
-sub _connection_manager_attributes { [qw/ username password hostname port vhost verbose /] }
+sub _connection_manager_attributes { [qw/ username password hostname port tls vhost verbose /] }
 
 1;
 
