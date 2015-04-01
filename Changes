@@ -1,5 +1,6 @@
   - Add support for making queues exclusive.
   - Add documentation to roles.
+  - Add TLS support
 
 0.003
   - Use core Message::Passing::Role::HasHostnameAndPort

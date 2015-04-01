@@ -26,6 +26,12 @@ has timeout => (
     default => sub { 30 },
 );
 
+has tls => (
+    is => 'ro',
+    isa => 'Bool',
+    default => sub { 0 },
+);
+
 has verbose => (
     is => 'ro',
     isa => 'Bool',
@@ -46,6 +52,7 @@ sub _build_connection {
         user       => $self->username,
         pass       => $self->password,
         vhost      => $self->vhost,
+        tls        => $self->tls,
         timeout    => $self->timeout,
         on_success => sub {
             $self->_set_connected(1);
@@ -77,6 +84,10 @@ Message::Passing::AMQP::ConnectionManager - Implements the Message::Passing::Rol
 Passed to L<AnyEvent::RabbitMQ>->new->connect.
 
 =head2 timeout
+
+Passed to L<AnyEvent::RabbitMQ>->new->connect.
+
+=head2 tls
 
 Passed to L<AnyEvent::RabbitMQ>->new->connect.
 
