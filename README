@@ -16,8 +16,8 @@ DESCRIPTION
     example RabbitMQ <http://www.rabbitmq.com/> or QPID.
 
 PROTOCOL VERSION
-    This adaptor uses the 0.8 version of the AMQP protocol, as currently
-    shipped with AnyEvent::RabbitMQ.
+    This adaptor supports all versions of the AMQP protocol supported by
+    AnyEvent::RabbitMQ.
 
 SEE ALSO
     Message::Passing::Output::AMQP
