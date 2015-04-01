@@ -14,7 +14,7 @@ license 'AGPL_3';
 requires 'Moose';
 requires 'namespace::autoclean';
 requires 'AnyEvent';
-requires 'AnyEvent::RabbitMQ' => '1.05';
+requires 'AnyEvent::RabbitMQ' => '1.15';
 requires 'JSON';
 requires 'JSON::XS';
 requires 'Try::Tiny';
