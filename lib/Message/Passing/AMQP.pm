@@ -27,7 +27,7 @@ An AMQP adaptor for L<Message::Passing> for speaking to AMQP servers, for exampl
 
 =head1 PROTOCOL VERSION
 
-This adaptor uses the 0.8 version of the AMQP protocol, as currently shipped with L<AnyEvent::RabbitMQ>.
+This adaptor supports all versions of the AMQP protocol supported by L<AnyEvent::RabbitMQ>.
 
 =head1 SEE ALSO
 

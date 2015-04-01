@@ -2,6 +2,7 @@
   - Add documentation to roles.
   - Add TLS support
   - Fix die on AMQP server restart (RT#87705)
+  - Fix docs regarding supported AMQP protocol versions (RT#94388)
 
 0.003
   - Use core Message::Passing::Role::HasHostnameAndPort
