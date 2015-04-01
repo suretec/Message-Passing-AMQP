@@ -37,6 +37,13 @@ has queue_exclusive => (
     default => 0,
 );
 
+has queue_auto_delete => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
+
 has _queue => (
     is => 'ro',
     writer => '_set_queue',
@@ -56,6 +63,7 @@ after '_set_channel' => sub {
         arguments => $self->queue_arguments,
         durable => $self->queue_durable,
         exclusive => $self->queue_exclusive,
+        auto_delete => $self->queue_auto_delete,
         $self->_has_queue_name ? (queue => $self->queue_name) : (),
         on_success => sub {
             $self->_set_queue(shift());
@@ -94,6 +102,14 @@ Defines if the queue is exclusive, defaults to false.
 =head2 queue_arguments
 
 Defines queue arguments, defaults to an empty hashref.
+
+=head2 queue_exclusive
+
+If true, the queue is flagged as exclusive.  Defaults to false.
+
+=head2 queue_auto_delete
+
+If true, the queue is flagged as auto-delete.  Defaults to false.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
