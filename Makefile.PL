@@ -9,7 +9,7 @@ resources(
     repository => "git://github.com/suretec/Message-Passing-AMQP.git",
 );
 
-license 'AGPL_3';
+license 'LGPL_2_1';
 
 requires 'Moose';
 requires 'namespace::autoclean';

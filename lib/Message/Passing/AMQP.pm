@@ -2,7 +2,7 @@ package Message::Passing::AMQP;
 use Moose ();
 use namespace::autoclean;
 
-our $VERSION = "0.005";
+our $VERSION = "0.006";
 $VERSION = eval $VERSION;
 
 1;
@@ -53,11 +53,7 @@ Copyright The above mentioned AUTHOR 2012.
 
 =head1 LICENSE
 
-GNU Affero General Public License, Version 3
-
-If you feel this is too restrictive to be able to use this software,
-please talk to us as we'd be willing to consider re-licensing under
-less restrictive terms.
+GNU Library General Public License, Version 2.1
 
 =cut
 
