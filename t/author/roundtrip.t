@@ -12,7 +12,9 @@ use Message::Passing::Filter::Decoder::JSON;
 my $cv = AnyEvent->condvar;
 my $input = Message::Passing::Input::AMQP->new(
     exchange_name => "log_stash_test",
+    exchange_auto_delete => 1,
     queue_name => "log_stash_test",
+    queue_auto_delete => 1,
     output_to => Message::Passing::Filter::Decoder::JSON->new(
         output_to => Message::Passing::Output::Test->new(
             cb => sub { $cv->send }
@@ -30,6 +32,7 @@ my $output = Message::Passing::Filter::Encoder::JSON->new(
         username => 'guest',
         password => 'guest',
         exchange_name => "log_stash_test",
+        exchange_auto_delete => 1,
 #        verbose => 1,
     ),
 );
