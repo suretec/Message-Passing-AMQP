@@ -14,7 +14,7 @@ has exchange_name => (
 
 has exchange_type => (
     is => 'ro',
-    isa => enum([qw/ topic direct fanout /]),
+    isa => enum([qw/ topic direct fanout headers /]),
     default => 'topic',
 );
 
@@ -60,7 +60,7 @@ Defines the exchange name, required.
 
 =head2 exchange_type
 
-Is one of topic, direct or fanout, defaults to topic.
+Is one of topic, direct, fanout or headers, defaults to topic.
 
 =head2 exchange_durable
 

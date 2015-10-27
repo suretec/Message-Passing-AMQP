@@ -14,6 +14,11 @@ has bind_routing_key => (
     default => '#',
 );
 
+has bind_arguments => (
+    isa => 'HashRef',
+    is => 'ro',
+);
+
 after [qw[_set_queue ]] => sub {
     my $self = shift;
     if ($self->_has_exchange && $self->_has_queue) {
@@ -22,6 +27,7 @@ after [qw[_set_queue ]] => sub {
            queue => $self->queue_name,
            exchange => $self->exchange_name,
            routing_key => $self->bind_routing_key,
+           arguments => $self->bind_arguments,
            on_success => sub {
                 #warn("Bound queue");
            },

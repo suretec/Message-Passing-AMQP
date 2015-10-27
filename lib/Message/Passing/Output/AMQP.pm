@@ -13,6 +13,11 @@ has routing_key => (
     default => '',
 );
 
+has header_cb => (
+    isa => 'CodeRef',
+    is => 'ro',
+);
+
 sub consume {
     my $self = shift;
     my $data = shift;
@@ -24,8 +29,13 @@ sub consume {
         warn("No exchange yet, dropping message");
         return;
     }
+    my $header;
+    $header = $self->header_cb->($data)
+        if defined $self->header_cb;
+
     $self->_channel->publish(
         body => $data,
+        header => $header,
         exchange => $self->exchange_name,
         routing_key => $self->routing_key,
     );
@@ -49,6 +59,23 @@ A L<Message::Passing> L<AnyEvent::RabbitMQ> output class.
 Can be used as part of a chain of classes with the L<message-pass> utility, or directly as
 a logger in normal perl applications.
 
+=head1 ATTRIBUTES
+
+=head2 routing_key
+
+The routing key for all messages, defaults to ''.
+
+=head2 header_cb
+
+Optional callback function which gets passed the message and should return a hashref passed to publish( header => ).
+
+NOTE: if you want to set the message headers (note the s) you have to pass them inside headers, e.g.:
+  {
+      content_type => 'application/json',
+      headers => {
+          key => 'value',
+      }
+  }
 =head1 METHODS
 
 =head2 consume
