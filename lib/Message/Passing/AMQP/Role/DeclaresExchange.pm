@@ -24,6 +24,12 @@ has exchange_durable => (
     default => 1,
 );
 
+has exchange_auto_delete => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
 has _exchange => (
     is => 'ro',
     writer => '_set_exchange',
@@ -36,6 +42,7 @@ after _set_channel => sub {
     $self->_channel->declare_exchange(
         type => $self->exchange_type,
         durable => $self->exchange_durable,
+        auto_delete => $self->exchange_auto_delete,
         exchange => $self->exchange_name,
         on_success => sub {
             $self->_set_exchange(shift()->method_frame);
@@ -65,6 +72,11 @@ Is one of topic, direct, fanout or headers, defaults to topic.
 =head2 exchange_durable
 
 Defines if the exchange is durable, defaults to true.
+
+=head2 exchange_auto_delete
+
+Defines if the exchange will be auto-deleted after the connection is closed,
+defaults to false.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
