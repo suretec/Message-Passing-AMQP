@@ -1,3 +1,5 @@
+  - Remove queue_type attribute as there is no such thing in AMQP
+
 0.006  2015-06-26 17:54:00+01:00 Europe/London
   - Fix license to be LGPL 2.1
 

@@ -18,13 +18,6 @@ has queue_name => (
 );
 
 # FIXME - Should auto-build from _queue as above
-has queue_type => (
-    is => 'ro',
-    isa => enum([qw/ topic direct fanout /]),
-    default => 'topic',
-);
-
-# FIXME - Should auto-build from _queue as above
 has queue_durable => (
     is => 'ro',
     isa => 'Bool',
@@ -86,10 +79,6 @@ Message::Passing::AMQP::Role::DeclaresQueue - Role for instances which have an A
 =head2 queue_name
 
 Defines the queue name, defaults to the name returned by the server.
-
-=head2 queue_type
-
-Is one of topic, direct or fanout, defaults to topic.
 
 =head2 queue_durable
 
