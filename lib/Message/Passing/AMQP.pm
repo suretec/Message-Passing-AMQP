@@ -2,7 +2,7 @@ package Message::Passing::AMQP;
 use Moose ();
 use namespace::autoclean;
 
-our $VERSION = "0.006";
+our $VERSION = "0.007";
 $VERSION = eval $VERSION;
 
 1;

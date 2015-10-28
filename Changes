@@ -1,3 +1,4 @@
+0.007  2015-10-28 09:57:00+01:00 Europe/Vienna
   - Add support for headers exchanges
   - Add a serialize callback to Output::AMQP for simpler header construction
   - Add support for making exchanges auto-delete
