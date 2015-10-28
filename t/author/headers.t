@@ -32,29 +32,29 @@ my $input = Message::Passing::Input::AMQP->new(
 #    verbose => 1,
 );
 
-my $output = Message::Passing::Filter::Encoder::JSON->new(
-    output_to => Message::Passing::Output::AMQP->new(
-        hostname => '127.0.0.1',
-        username => 'guest',
-        password => 'guest',
-        exchange_name => "M::P::AMQP_header_test",
-        exchange_type => 'headers',
-        exchange_auto_delete => 1,
-        header_cb => sub {
-            my $message = shift;
-            my $header = {
-                content_type => 'application/json',
-            };
-            # only set the headers for one message
-            $header->{headers} = {
-                header1 => 'foo',
-                header2 => 'bar',
-            }
-                if $message eq '{"foo":"bar"}';
-            return $header;
-        },
-#        verbose => 1,
-    ),
+my $filter = Message::Passing::Filter::Encoder::JSON->new(output_to => undef);
+my $output = Message::Passing::Output::AMQP->new(
+    hostname => '127.0.0.1',
+    username => 'guest',
+    password => 'guest',
+    exchange_name => "M::P::AMQP_header_test",
+    exchange_type => 'headers',
+    exchange_auto_delete => 1,
+    header_cb => sub {
+        my $message = shift;
+        my $header = {
+            content_type => 'application/json',
+        };
+        # only set the headers for one message
+        $header->{headers} = {
+            header1 => 'foo',
+            header2 => 'bar',
+        }
+            if $message->{foo} eq 'bar';
+       return $header;
+    },
+    serialize_cb => sub { $filter->filter(shift) },
+#    verbose => 1,
 );
 
 my $this_cv = AnyEvent->condvar;

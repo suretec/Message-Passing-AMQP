@@ -18,10 +18,15 @@ has header_cb => (
     is => 'ro',
 );
 
+has serialize_cb => (
+    isa => 'CodeRef',
+    is => 'ro',
+);
+
 sub consume {
     my $self = shift;
     my $data = shift;
-    if (ref $data) {
+    if (ref $data && ! defined $self->serialize_cb) {
         warn("Passed non-serialized data - is a perl reference. Dropping.\n");
         return;
     }
@@ -32,6 +37,9 @@ sub consume {
     my $header;
     $header = $self->header_cb->($data)
         if defined $self->header_cb;
+
+    $data = $self->serialize_cb->($data)
+        if defined $self->serialize_cb;
 
     $self->_channel->publish(
         body => $data,
@@ -67,15 +75,37 @@ The routing key for all messages, defaults to ''.
 
 =head2 header_cb
 
-Optional callback function which gets passed the message and should return a hashref passed to publish( header => ).
+Optional callback function which gets passed the message before it is
+serialized using L</serialize_cb>.
+Should return a hashref which gets passed to publish( header => ).
 
 NOTE: if you want to set the message headers (note the s) you have to pass them inside headers, e.g.:
+
   {
       content_type => 'application/json',
       headers => {
           key => 'value',
       }
   }
+
+=head2 serialize_cb
+
+Optional callback function which gets passed the message and should return a
+scalar. This is useful when passing structured messages e.g. hashrefs or
+objects where some attributes should be accessible for the L</header_cb> function.
+If the serialization happens before using a L<Message::Passing::Role::Filter>
+it would require to deserialize it again in header_cb.
+To use a Message::Passing filter you can instantiate it and pass it's filter
+function to serialize_cb:
+
+  my $filter = Message::Passing::Filter::Encoder::JSON->new(output_to => undef);
+
+  ...
+
+  {
+      serialize_cb => sub { $filter->filter(shift) },
+  }
+
 =head1 METHODS
 
 =head2 consume
@@ -103,4 +133,3 @@ Sends a message.
 See L<Message::Passing::AMQP>.
 
 =cut
-
