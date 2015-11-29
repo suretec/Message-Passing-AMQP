@@ -80,6 +80,11 @@ Message::Passing::AMQP::Role::DeclaresQueue - Role for instances which have an A
 
 Defines the queue name, defaults to the name returned by the server.
 
+The server may place restrictions on queue names it generates that
+make them unsuitable in scenarios involving server restarts.
+
+Recommend explicitly defining the queue name in those cases.
+
 =head2 queue_durable
 
 Defines if the queue is durable, defaults to true.
