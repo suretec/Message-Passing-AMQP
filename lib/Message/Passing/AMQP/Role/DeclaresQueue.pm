@@ -14,6 +14,7 @@ has queue_name => (
     lazy => 1,
     default => sub {
         my $self = shift;
+        $self->_requested_queue_name( 0 );
         $self->_queue->method_frame->queue;
     }
 );
@@ -50,6 +51,12 @@ has queue_arguments => (
     default => sub { {} }, # E.g. 'x-ha-policy' => 'all'
 );
 
+has _requested_queue_name => (
+    is => 'rw',
+    isa => 'Bool',
+    default => 1,
+);
+
 has queue_forget => (
     is => 'ro',
     isa => 'Bool',
@@ -77,7 +84,8 @@ after '_set_channel' => sub {
 
 after 'disconnected' => sub {
     my $self = shift;
-    if ($self->_has_queue_name && $self->queue_forget) {
+    if ((!$self->_requested_queue_name) &&
+            ($self->_has_queue_name && $self->queue_forget)) {
         warn('FORGET ' . $self->queue_name);
         $self->_clear_queue;
     }
@@ -114,6 +122,7 @@ If true, the queue is flagged as auto-delete, defaults to false.
 =head2 queue_forget
 
 If true, forget server-generated queue name on disconnect.
+Has no effect if queue_name is explicitly set.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
