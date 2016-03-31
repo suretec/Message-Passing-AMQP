@@ -86,7 +86,6 @@ after 'disconnected' => sub {
     my $self = shift;
     if ((!$self->_requested_queue_name) &&
             ($self->_has_queue_name && $self->queue_forget)) {
-        warn('FORGET ' . $self->queue_name);
         $self->_clear_queue;
     }
 };
@@ -121,7 +120,7 @@ If true, the queue is flagged as auto-delete, defaults to false.
 
 =head2 queue_forget
 
-If true, forget server-generated queue name on disconnect.
+If true, forget server-generated queue name on disconnect, defaults to false.
 Has no effect if queue_name is explicitly set.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
