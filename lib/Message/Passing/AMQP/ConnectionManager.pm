@@ -21,12 +21,6 @@ has vhost => (
     required => 1,
 );
 
-has timeout => (
-    is => 'ro',
-    isa => 'Int',
-    default => sub { 30 },
-);
-
 has tls => (
     is => 'ro',
     isa => Bool,
