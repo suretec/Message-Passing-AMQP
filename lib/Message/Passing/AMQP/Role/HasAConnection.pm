@@ -40,6 +40,10 @@ Message::Passing::AMQP::Role::HasAConnection - Implements the Message::Passing::
 
 =head1 ATTRIBUTES
 
+=head2 tls
+
+Gets passed to L<Message::Passing::AMQP::ConnectionManager>, defaults to false.
+
 =head2 vhost
 
 Gets passed to L<Message::Passing::AMQP::ConnectionManager>, defaults to '/'.

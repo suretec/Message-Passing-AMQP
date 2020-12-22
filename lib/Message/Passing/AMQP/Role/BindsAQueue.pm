@@ -51,6 +51,10 @@ Role for components which cause a single queue to be bound to a single exchange 
 
 =head1 ATTRIBUTES
 
+=head2 bind_arguments
+
+Gets passed to L<Message::Passing::AMQP::ConnectionManager>, defaults to false.
+
 =head2 bind_routing_key
 
 Defaults to C<#>, which matches any routing key.
