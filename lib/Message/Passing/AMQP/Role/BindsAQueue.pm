@@ -1,5 +1,6 @@
 package Message::Passing::AMQP::Role::BindsAQueue;
-use Moose::Role;
+use Moo::Role;
+use Types::Standard qw( Str HashRef );
 use Scalar::Util qw/ weaken /;
 use namespace::autoclean;
 
@@ -9,13 +10,13 @@ with qw/
 /;
 
 has bind_routing_key => (
-    isa => 'Str',
+    isa => Str,
     is => 'ro',
     default => '#',
 );
 
 has bind_arguments => (
-    isa => 'HashRef',
+    isa => HashRef,
     is => 'ro',
 );
 
