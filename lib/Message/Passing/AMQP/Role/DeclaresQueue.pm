@@ -10,9 +10,11 @@ has queue_name => (
     is => 'ro',
     isa => Str,
     predicate => '_has_queue_name',
+    clearer => '_clear_queue',
     lazy => 1,
     default => sub {
         my $self = shift;
+        $self->_requested_queue_name( 0 );
         $self->_queue->method_frame->queue;
     }
 );
@@ -49,6 +51,18 @@ has queue_arguments => (
     default => sub { {} }, # E.g. 'x-ha-policy' => 'all'
 );
 
+has _requested_queue_name => (
+    is => 'rw',
+    isa => 'Bool',
+    default => 1,
+);
+
+has queue_forget => (
+    is => 'ro',
+    isa => 'Bool',
+    default => 0,
+);
+
 after '_set_channel' => sub {
     my $self = shift;
     weaken($self);
@@ -66,6 +80,14 @@ after '_set_channel' => sub {
             $self->_clear_channel;
         },
     );
+};
+
+after 'disconnected' => sub {
+    my $self = shift;
+    if ((!$self->_requested_queue_name) &&
+            ($self->_has_queue_name && $self->queue_forget)) {
+        $self->_clear_queue;
+    }
 };
 
 1;
@@ -100,6 +122,11 @@ Defines queue arguments, defaults to an empty hashref.
 =head2 queue_auto_delete
 
 If true, the queue is flagged as auto-delete, defaults to false.
+
+=head2 queue_forget
+
+If true, forget server-generated queue name on disconnect, defaults to false.
+Has no effect if queue_name is explicitly set.
 
 =head1 AUTHOR, COPYRIGHT AND LICENSE
 
